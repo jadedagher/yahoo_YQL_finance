@@ -1,0 +1,166 @@
+<!doctype HTML>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Comaptible" content="IE=edge">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+			
+</head>
+
+<body>
+
+
+	
+	
+	<div class="container">
+		<div class="col-md-12">
+			<h1><strong>Data Visualization</strong></h1> 
+			<p id="time"></p>
+		</div> 
+	</div>
+
+		<!-- _________________________btn_________________________ -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+			
+				<button type="button" class="btn btn-info" onclick="buttonPressed('year')">1 year</button>
+
+				<button type="button" class="btn btn-info" onclick="buttonPressed('halfyear')">6 months</button>
+
+				<button type="button" class="btn btn-info" onclick="buttonPressed('thisMonth')">1 month</button>
+
+				<button type="button" class="btn btn-info" onclick="buttonPressed('thisWeek')">1 week</button>
+
+				<button type="button" class="btn btn-warning" onclick="reloadPage()">Refresh data</button>
+
+
+			</div>
+		</div>
+	</div>
+
+
+	<!-- _________________________historic_chart_div_________________________ -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" id="historic_chart_div" style="width: 1200px; height: 800px"></div>
+		</div>
+	</div>
+
+	<!-- _________________________buy_________________________ -->
+	<div class="container">
+		<div class="row">
+			<form class="form-inline">
+			  <div class="form-group">
+			   
+			    <label style=class="sr-only" for="exampleInputAmount"></label>
+			    
+			    <div class="input-group">
+			      
+			      <div class="input-group-addon">Number of Action</div>
+			      <input type="text" class="form-control" id="exampleInputAmount1" placeholder="Quantity">
+			      <div class="input-group-addon"><p id="LastTradePriceOnlyToCall"></p></div>
+
+			    </div>
+			  </div>
+		  		<button type="submit" class="btn btn-success" id="call">Call</button>
+			</form>
+		
+		</br>
+		</br>
+
+			<form class="form-inline">
+			  <div class="form-group">
+			   
+			    <label class="sr-only" for="exampleInputAmount"></label>
+			    
+			    <div class="input-group">
+			      
+			      <div class="input-group-addon">Number of Action</div>
+			      <input type="text" class="form-control" id="exampleInputAmount2" placeholder="Quantity">
+			      <div class="input-group-addon"><p id="LastTradePriceOnlyToPut"></p></div>
+
+			    </div>
+			  </div>
+		  		<button type="submit" class="btn btn-danger" id="put">Put</button>
+			</form>
+		</div>
+	</div>
+
+
+<!-- _________________________stock informations_________________________ -->
+	<div class="container">
+		<div class="col-md-12">
+				<h2 id="Name"></h2>
+			<blockquote>
+				<ul>
+					<li><h2 style="color: green;"id="Change"></h2></li>
+					<li><h2 style="color: green;"id="LastTradePriceOnly"></h2><button type="submit" class="btn btn-default" id="LastTradePriceOnlybtn">Show Last Trade Price Only Value</button></li>
+					<li><h2 id="DaysHigh"></h2></li>
+					<li><h2 id="DaysLow"></h2></li>
+					<li><h2 id="MarketCapitalization"></h2></li>
+				</ul>
+			</blockquote>
+		</div>
+	</div>
+
+
+<!-- _________________________historic_chart_div_________________________ -->
+<!-- wait to stock the data in a database -->
+
+	<!-- <div class="container">
+		<div class="row">
+			<div class="col-md-12" id="realTime_chart_div" style="width: 1200px; height: 800px"></div>
+		</div>
+	</div> -->
+
+
+
+
+<script type="bootstap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="historic_chart.js"></script>
+
+<!-- wait to stock the data in a database -->
+<!-- <script type="text/javascript" src="realTime_chart.js"></script> -->
+
+<script type="text/javascript" src="YAHOO_query.js"></script>
+
+<!-- javascript&jquery on the page -->
+<script type="text/javascript">
+	
+	//get time 
+	document.getElementById("time").innerHTML = Date();
+
+	//button to reload page 
+	function reloadPage() {
+    	location.reload();
+	}
+
+	//button to put/call
+	$(document).ready(function(){
+    $("#call").click(function(){
+        alert("You are trying to buy " + $("#exampleInputAmount1").val() +" actions at " +$("#LastTradePriceOnly").html() +" so " +$("#exampleInputAmount2").val()*$("#LastTradePriceOnly" ).html() +" USD ");
+    	});
+    $("#put").click(function(){
+        alert("You are trying to buy " + $("#exampleInputAmount2").val() +" actions at " +$("#LastTradePriceOnly" ).html() +" so " +$("#exampleInputAmount2").val()*$("#LastTradePriceOnly" ).html() +" USD ");
+    	});
+	});
+
+	//button to get value of LastTradePriceOnly
+	$(document).ready(function(){
+    $("#LastTradePriceOnlybtn").click(function(){
+        alert($("#LastTradePriceOnly").html());
+    	});
+	});
+
+
+</script>
+
+<html>
